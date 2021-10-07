@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.core.query.TextCriteria;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
+// MomentRepository handles database queries for Moment collection
 public interface MomentRepository extends MongoRepository<Moment, String> {
     Page<Moment> findAllBy(TextCriteria criteria, Pageable pageable);
 }

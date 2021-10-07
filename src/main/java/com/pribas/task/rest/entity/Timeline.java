@@ -10,6 +10,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/*  Timeline object/entity,
+    fields: id(id), title & description(indexed for object),
+            userid, creation_date(declared when an object is created),
+            tags[], moments[], score(calculated when performing a search)   */
 @Data
 @Document
 public class Timeline {

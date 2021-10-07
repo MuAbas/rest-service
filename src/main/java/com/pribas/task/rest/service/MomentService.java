@@ -13,17 +13,24 @@ import org.springframework.stereotype.Service;
 import java.util.Map;
 import java.util.Optional;
 
+/*  Service for Moment collection
+    Handles all the logic and
+    calls MomentRepository to fetch data    */
 @AllArgsConstructor
 @Service
 public class MomentService {
 
     private final MomentRepository momentRepository;
 
+    /*  fetch all Moment documents.
+        show pageSize amount of documents per page   */
     public Page<Moment> getAllMoments(int page, int pageSize) {
         Pageable pageable = PageRequest.of(page, pageSize);
         return momentRepository.findAll(pageable);
     }
 
+    /*  fetch all Moment documents where title or description fields match
+        searchText string. Show pageSize amount of documents per page   */
     public Page<Moment> findMoment(String searchText, int page, int pageSize) {
         if (searchText.isEmpty())
             throw new NullPointerException("no search text");
@@ -33,16 +40,21 @@ public class MomentService {
         return momentRepository.findAllBy(criteria, pageable);
     }
 
+    // add new Moment document to Moment collection
     public String addMoment(Moment moment) {
         momentRepository.save(moment);
         return "Moment Added::" + moment.getTitle();
     }
 
+    /*  delete Moment document from
+        Moment collection using its id   */
     public String deleteMoment(String id) {
         momentRepository.deleteById(id);
         return "Deleted Moment::" + id;
     }
 
+    /*  takes a Map(JSON file) as a parameter to retrieve values form keys.
+        updates a specific Moment document's fields (title, description, date(moment_date)) */
     public String update(Map<String, String> body) {
         String id = body.get("id");
         String title = body.get("title");
@@ -61,6 +73,7 @@ public class MomentService {
         return "Moment Updated::" + id;
     }
 
+    // fetch a Moment document using its id
     public Optional<Moment> getMomentById(String id) {
         return momentRepository.findById(id);
     }

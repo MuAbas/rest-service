@@ -5,6 +5,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+/*  User object/entity,
+    fields: id(id), username & email(must be unique for each object), password  */
 @Data
 @Document
 public class User {

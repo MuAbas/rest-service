@@ -8,6 +8,10 @@ import org.springframework.data.mongodb.core.mapping.TextScore;
 
 import java.time.LocalDateTime;
 
+/*  Moment object/entity,
+    fields: id(id), title & description(indexed for search),
+            moment_date, creation_date(declared when an object is created)
+            score(calculated when performing a search)  */
 @Data
 @Document
 public class Moment {

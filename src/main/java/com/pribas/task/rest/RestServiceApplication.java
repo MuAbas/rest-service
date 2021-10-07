@@ -16,51 +16,47 @@ import java.util.List;
 
 @SpringBootApplication
 public class RestServiceApplication {
-
+    // Application entry point
     public static void main(String[] args) {
         SpringApplication.run(RestServiceApplication.class, args);
     }
 
-    @Bean
-    CommandLineRunner runner(UserRepository userRepository, TimelineRepository timelineRepository, MomentRepository momentRepository) {
-        return args -> {
-            User user = new User(
-                    "mubas",
-                    "mohalabas@yahoo.com",
-                    "1234"
-            );
+    // Example Bean to execute
+//    @Bean
+//    CommandLineRunner runner(UserRepository userRepository, TimelineRepository timelineRepository, MomentRepository momentRepository) {
+//        return args -> {
+//            User user = new User(
+//                    "mubas",
+//                    "mohalabas@yahoo.com",
+//                    "1234"
+//            );
 //            userRepository.insert(user);
-
-            Moment moment1 = new Moment(
-                    "Company Establishment",
-                    "Established in Frankfurt",
-                    "12.12"
-            );
-            Moment moment2 = new Moment(
-                    "B2B Booking",
-                    "First Implementation",
-                    "14.14"
-            );
+//
+//            Moment moment1 = new Moment(
+//                    "Company Establishment",
+//                    "Established in Frankfurt",
+//                    "12.12"
+//            );
+//            Moment moment2 = new Moment(
+//                    "B2B Booking",
+//                    "First Implementation",
+//                    "14.14"
+//            );
 //            momentRepository.insert(moment1);
 //            momentRepository.insert(moment2);
-
-//            List<Moment> moments = new ArrayList<>();
-//            moments.add(moment1);
-//            moments.add(moment2);
-
-            List<String> tags = new ArrayList<>();
-            tags.add("tag1");
-            tags.add("tag2");
-
-            Timeline timeline = new Timeline(
-                    "Great Timeline",
-                    "important moments",
-                    user.getId(),
-                    tags
-            );
+//
+//            List<String> tags = new ArrayList<>();
+//            tags.add("tag1");
+//            tags.add("tag2");
+//
+//            Timeline timeline = new Timeline(
+//                    "Great Timeline",
+//                    "important moments",
+//                    user.getId(),
+//                    tags
+//            );
 //            timelineRepository.insert(timeline);
-
-        };
-    }
+//        };
+//    }
 
 }

@@ -16,6 +16,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+/*  Service for Timeline collection
+    Handles all the logic and
+    calls TimelineRepository to fetch data    */
 @AllArgsConstructor
 @Service
 public class TimelineService {
@@ -23,11 +26,15 @@ public class TimelineService {
     private final TimelineRepository timelineRepository;
     private final MomentRepository momentRepository;
 
+    /*  fetch all Timeline documents.
+        show pageSize amount of documents per page   */
     public Page<Timeline> getAllTimelines(int page, int pageSize) {
         Pageable pageable = PageRequest.of(page, pageSize);
         return timelineRepository.findAll(pageable);
     }
 
+    /*  fetch all Timeline documents where title or description fields match
+        searchText string. Show pageSize amount of documents per page   */
     public Page<Timeline> findTimeline(String searchText, int page, int pageSize) {
         if (searchText.isEmpty())
             throw new NullPointerException("no search text");
@@ -37,16 +44,23 @@ public class TimelineService {
         return timelineRepository.findAllBy(criteria, pageable);
     }
 
+    // add new Timeline document to Timeline collection
     public String addTimeline(Timeline timeline) {
         timelineRepository.save(timeline);
         return "Timeline Added::" + timeline.getTitle();
     }
 
+    /*  delete Timeline document from
+        Timeline collection using its id   */
     public String deleteTimeline(String id) {
         timelineRepository.deleteById(id);
         return "Deleted Timeline::" + id;
     }
 
+    /*  edit moments[] field in a Timeline document.
+        takes:
+        - Map(JSON file): to retrieve values from keys.
+        - boolean addFlag: indicates whether to add a moment or remove from moments list  */
     public String editMoments(Map<String, String> body, boolean addFlag) {
         String timelineId = body.get("timelineId");
         String momentId = body.get("momentId");
@@ -65,6 +79,8 @@ public class TimelineService {
         return ((addFlag) ? "Moment Added::" : "Moment Removed::") + timelineId;
     }
 
+    /*  takes a Map(JSON file) as a parameter to retrieve values form keys.
+        updates a specific Timeline document's fields (userid, title, description, tags) */
     public String update(Map<String, String> body) {
         String id = body.get("id");
         String userid = body.get("userid");
@@ -87,6 +103,7 @@ public class TimelineService {
         return "Timeline Updated::" + id;
     }
 
+    // get moments list of a specific Timeline
     public List<Moment> getMomentsList(String id) {
         return timelineRepository.findById(id).orElse(null).getMoments();
     }
