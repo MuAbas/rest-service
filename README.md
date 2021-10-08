@@ -39,6 +39,8 @@ A RESTful service used to create, delete, edit and list timelines to track event
 # API Requests
 All API requests are mapped to `/api`
 
+**[Examples Available Here](examples/README.md)**
+
 ## User
 ##### Mapped to `/api/users`
 
